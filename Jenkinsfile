@@ -36,7 +36,8 @@ pipeline{
                 sshagent(['GLOBAL_CRED_ID']){
                     sh '''
                     scp -o -r StrictHostKeyChecking=no ${WORKSPACE}/* ${EC2_HOST}:${REMOTE_DIR}
-                    ssh ${EC2_HOST} "sudo mv /home/ubuntu/* /var/www/"
+                    cd ${REMOTE_DIR}
+                    python3 app.py
                     '''
                 }
             }
